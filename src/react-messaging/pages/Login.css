@@ -1,0 +1,95 @@
+:root {
+    --main-bg-color : #061f3a;
+    --secondary-bg-color: rgb(0 42 85 / 59%);
+    --main-box-shadow: -1px 4px 20px -6px rgba(0,0,0,0.2);
+    --secondary-border-color: rgb(19, 47, 76);
+    --primary-text-color: white;
+
+}
+
+.login{
+    background-color: var(--main-bg-color);
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+}
+
+.login__container{
+    padding: 50px;
+    text-align: center;
+    background-color: var(--secondary-bg-color);
+    border-radius: 10px;
+    border: var(--secondary-border-color);
+    box-shadow: var(--main-box-shadow);
+}
+
+.login__title{
+    color: var(--primary-text-color);
+    text-align: left;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.login__container > button{
+    margin-top: 50px;
+    text-transform: inherit !important;
+    background-color: #0a8d49 !important;
+    color: white;
+}
+
+.form__label{
+    color: var(--primary-text-color);
+    padding-left: 5px;
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: left;
+}
+
+.input__container{
+    min-width: 300px;
+    padding-top: 20px;
+}
+
+
+.input__box{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    height: 35px;
+    border-radius: 10px;
+}
+.input__container .input__box > input{
+    border: none;
+    margin-left: 10px;
+    width: 90%;
+    outline: none;
+}
+
+.btn__container > button{
+    margin-top: 30px;
+    width: 100%;
+    border-radius: 10px;
+    text-transform: inherit !important;
+    background-color: #0a8d49 !important;
+    color: white;
+}
+
+.login .btn__container .MuiSvgIcon-root{
+    margin-right: 1vw;
+    font-size: 24px !important;
+}
+
+.link__signup{
+    margin-top: 15px;
+    color: var(--primary-text-color);
+}
+
+.link__signup a {
+    margin-left: 8px;
+    color: #0a8d49;
+    font-weight: 600;
+}

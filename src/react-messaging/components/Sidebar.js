@@ -89,7 +89,7 @@ function Sidebar() {
       <div className="sidebar__users">
         <SidebarUser addNewChat />
         {users.map(user =>(
-            <SidebarUser key={user.uid} id ={user.uid} user = {user} />
+            <SidebarUser key={user.uid} id ={user.uid} userl = {user} />
         ))}
       </div>
     </div>

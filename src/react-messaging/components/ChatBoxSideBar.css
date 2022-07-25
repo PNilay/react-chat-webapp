@@ -1,0 +1,19 @@
+
+.chat__sidebar__header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+  }
+
+.chat__sidebar{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    border-left: 1px solid lightgray;
+}
+
+.chat__navList{
+    list-style: none;
+    padding: 0;
+}

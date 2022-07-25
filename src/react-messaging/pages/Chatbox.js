@@ -15,6 +15,7 @@ import "./Chatbox.css";
 import firebase from "firebase/compat/app"; //v9
 import { useStateValue } from "../reactContext/StateProvider";
 import { db } from "../../firebase";
+import ChatBoxSideBar from "../components/ChatBoxSideBar";
 import {
   addDoc,
   collection,
@@ -69,9 +70,9 @@ function Chatbox() {
       //     setMessages(snapshot.docs.map((doc) => doc.data()))
       //   );
 
-      const messgaesRef = collection(db, "messages", combined_id, 'chat');
+      const messgaesRef = collection(db, "messages", combined_id, "chat");
 
-      const q2 = query(messgaesRef, orderBy('timestamp', 'asc'));
+      const q2 = query(messgaesRef, orderBy("timestamp", "asc"));
 
       onSnapshot(q2, (querySnapshot) => {
         let msgs = [];
@@ -80,9 +81,6 @@ function Chatbox() {
         });
         setMessages(msgs);
       });
-
-
-
     }
   }, [userId]);
 
@@ -142,19 +140,25 @@ function Chatbox() {
       </div>
 
       <div className="chat__body">
-        {messages.map((message) => (
-          <p
-            className={`chat__message ${
-              message.to == userId && "chat__reciver"
-            }`}
-          >
-            <span className="chat__name">{message.name}</span>
-            {message.message}
-            <span className="chat__timestamp">
-              {new Date(message.timestamp?.toDate()).toUTCString()}
-            </span>
-          </p>
-        ))}
+        <div className="chat__body__msgs">
+          {messages.map((message) => (
+            <p
+              className={`chat__message ${
+                message.to == userId && "chat__reciver"
+              }`}
+            >
+              <span className="chat__name">{message.name}</span>
+              {message.message}
+              <span className="chat__timestamp">
+                {new Date(message.timestamp?.toDate()).toUTCString()}
+              </span>
+            </p>
+          ))}
+        </div>
+
+        <div className="chat__body__menu">
+          <ChatBoxSideBar />
+        </div>
       </div>
 
       <div className="chat__footer">
@@ -172,6 +176,8 @@ function Chatbox() {
         </form>
         <Mic />
       </div>
+
+      {/* <ChatBoxSideBar /> */}
     </div>
   );
 }

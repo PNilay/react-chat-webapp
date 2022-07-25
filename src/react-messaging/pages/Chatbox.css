@@ -32,12 +32,36 @@
   }
 
   .chat__body {
+    /* background-color: rgba(242, 243, 0, 0.1); */
+    flex: 1;
+    /* padding: 30px; */
+    /* overflow: scroll; */
+    display: flex;
+    flex-direction: row;
+  }
+
+  /* .chat__body {
+    display: flex;
+    align-items: center;
+    padding: 0;
+  } */
+
+  .chat__body__msgs{
+    /* flex: 1; */
+    /* padding-left: 20px; */
     background-color: rgba(242, 243, 0, 0.1);
     flex: 1;
     padding: 30px;
     overflow: scroll;
+    flex-direction: row;
+    /* border: 1px solid red; */
   }
 
+  .chat__body__menu{
+    display: flex;
+    justify-content: space-between;
+    /* min-width: 100px; */
+  }
   .chat__message {
     position: relative;
     font-size: 16px;

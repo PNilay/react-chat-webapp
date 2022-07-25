@@ -39,14 +39,12 @@ function Sidebar() {
       setUsers(users);
     });
 
-    console.log("USERS",users);
     return () => {
       unsubscribe();
     };
   }, []);
 
   const sign_Out = async () => {
-    console.log("Sign Out");
     await updateDoc(doc(db, "users", user.uid), {
       isOnline: false,
     });

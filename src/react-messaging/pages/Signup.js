@@ -46,9 +46,12 @@ function SignUp() {
         uid: result.user.uid,
         name,
         email,
-        password,
         createdAt: Timestamp.fromDate(new Date()),
         isOnline: false,
+      });
+
+      await setDoc(doc(db, "users_password", result.user.uid), {
+        password,
       });
 
       setData({

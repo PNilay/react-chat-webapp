@@ -14,6 +14,8 @@ import { signOut } from "firebase/auth";
 import { updateDoc, doc, onSnapshot, QuerySnapshot } from "firebase/firestore";
 import { actionTypes } from "../reactContext/Reducer";
 import { useNavigate } from "react-router-dom";
+import GroupAddIcon from "@material-ui/icons/GroupAdd";
+
 
 // Firebase Query:
 import { collection, query, where } from "firebase/firestore";
@@ -86,13 +88,17 @@ function Sidebar() {
     navigate("/login");
   };
 
+  const add_Group =  () => {
+    navigate("/add_group");
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar__header">
-        <Avatar src={`https://avatars.dicebear.com/api/avataaars/11.svg`} />{" "}
+        <Avatar src={`https://avatars.dicebear.com/api/bottts/${user.uid}.svg`} />{" "}
         <div className="sidebar__header__right">
-          <IconButton>
-            <DonutLargeIcon />
+          <IconButton onClick={add_Group}>
+            <GroupAddIcon />
           </IconButton>
           <IconButton>
             <ChatIcon />
@@ -121,8 +127,8 @@ function Sidebar() {
           }else if(val.name.toLowerCase().includes(searchVal.toLowerCase())){
             return val;
           }
-        }).map(user =>(
-            <SidebarUser key={user.uid} id ={user.uid} userl = {user} />
+        }).map(userlist =>(
+            <SidebarUser key={userlist.uid} id ={userlist.uid} userl = {userlist} search = {searchVal != ""}/>
         ))}
       </div>
     </div>

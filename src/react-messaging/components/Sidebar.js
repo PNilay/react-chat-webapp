@@ -23,6 +23,8 @@ function Sidebar() {
   // const [{}, dispatch] = useStateValue();
   const [users, setUsers] = useState([]);
 
+  const [searchVal, setSearchVal] = useState('');
+
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
 
@@ -43,6 +45,33 @@ function Sidebar() {
       unsubscribe();
     };
   }, []);
+
+  // useEffect(() => {
+  //   // console.log("Search");
+  //   if(searchVal.length > 0){
+  //     const usersRef = collection(db, "users");
+
+  //   const q = query(usersRef, where("uid", "not-in", [user.uid]));
+
+  //   let temp = [];
+
+  //   onSnapshot(q, (querySnapshot) => {
+  //     querySnapshot.forEach((doc) => {
+  //       console.log("S");
+
+  //       temp.push(doc.data());
+  //     });
+  //   });
+
+  //     let seacrhQuery = searchVal.toLowerCase(); f
+  //     for(const key in temp){
+  //       console.log(key);
+  //     }
+  //   }
+  //   return () => {
+  //     false;
+  //   };
+  // },[searchVal]);
 
   const sign_Out = async () => {
     await updateDoc(doc(db, "users", user.uid), {
@@ -80,13 +109,19 @@ function Sidebar() {
       <div className="sidebar__search">
         <div className="sidebar__search__box">
           <SearchOutlined />
-          <input type="text" placeholder="Search or start new chat" />
+          <input type="text" placeholder="Search or start new chat" onChange={(event) =>setSearchVal(event.target.value)} value={searchVal}/>
         </div>
       </div>
 
       <div className="sidebar__users">
         <SidebarUser addNewChat />
-        {users.map(user =>(
+        {users.filter((val)=>{
+          if(searchVal == ""){
+            return val;
+          }else if(val.name.toLowerCase().includes(searchVal.toLowerCase())){
+            return val;
+          }
+        }).map(user =>(
             <SidebarUser key={user.uid} id ={user.uid} userl = {user} />
         ))}
       </div>

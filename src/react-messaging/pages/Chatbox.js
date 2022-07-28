@@ -106,23 +106,27 @@ function Chatbox() {
       to: userId,
       timestamp: Timestamp.fromDate(new Date()),
     });
-    console.log(combined_id);
     setInput("");
   };
 
   return (
     <div className="chat">
       <div className="chat__header">
-        <Avatar
+        {/* <Avatar
           src={`https://avatars.dicebear.com/api/avataaars/${userId}.svg`}
-        />
+        /> */}
+
+        <Avatar src={`https://avatars.dicebear.com/api/bottts/${userId}.svg`} />
+
         <div className="chat__headerInfo">
           <h3>{chatName.name}</h3>
           <p>
             Last seen {"  "}
-            {new Date(
-              messages[messages.length - 1]?.timestamp?.toDate()
-            ).toUTCString()}
+            {messages.length > 0
+              ? new Date(
+                  messages[messages.length - 1]?.timestamp?.toDate()
+                )?.toUTCString()
+              : "...."}
           </p>
         </div>
 

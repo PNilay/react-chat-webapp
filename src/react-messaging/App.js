@@ -16,6 +16,7 @@ import SignUp from "./pages/Signup";
 import Home from "./components/Home";
 import Chatbox from "./pages/Chatbox";
 import { useStateValue } from "./reactContext/StateProvider";
+import AddGroup from "./components/AddGroup";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
@@ -35,6 +36,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />}>
               <Route exact path= 'chat/:userId/' element={<Chatbox />} />
+              <Route exact path= 'add_group' element={<AddGroup />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />

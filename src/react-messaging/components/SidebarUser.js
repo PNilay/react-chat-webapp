@@ -18,7 +18,7 @@ import {
 } from "firebase/firestore";
 import { useStateValue } from "../reactContext/StateProvider";
 
-function SidebarUser({ id, userl, addNewChat }) {
+function SidebarUser({ id, userl, addNewChat, search }) {
   const [seed, setSeed] = useState("");
 
   const [messages, setMessages] = useState("");
@@ -47,17 +47,18 @@ function SidebarUser({ id, userl, addNewChat }) {
     const roomName = prompt("Please enter name for chat");
   };
 
-  return !addNewChat ? (
+  return !addNewChat ? ((messages[0]?.message != null || search) ? (
     <Link to={`/chat/${id}`}>
       <div className="sidebar_user">
-        <Avatar src={`https://avatars.dicebear.com/api/avataaars/${id}.svg`} />
+        {/* <Avatar src={`https://avatars.dicebear.com/api/avataaars/${id}.svg`} /> */}
+        <Avatar src={`https://avatars.dicebear.com/api/bottts/${id}.svg`} />
         <div className="sidevaruser__info">
           <h2>{userl.name}</h2>
-          <p>{messages[0]?.message}</p>
+          <p>{messages[messages.length-1]?.message}</p>
         </div>
       </div>
     </Link>
-  ) : (
+  ): <></>) : (
     <div onClick={createChat} className="sidebar_user">
       <h2>Add new Chat</h2>
     </div>

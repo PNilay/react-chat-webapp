@@ -1,0 +1,56 @@
+:root {
+  --main-bg-color: #061f3a;
+  --secondary-bg-color: rgb(0 42 85 / 59%);
+  --main-box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.2);
+  --secondary-border-color: rgb(19, 47, 76);
+  --primary-text-color: white;
+}
+
+.createGroup {
+  flex: 0.65;
+  display: flex;
+  flex-direction: column;
+  /* background-color: var(--main-bg-color); */
+  /* place-items: center; */
+}
+
+.createGroup__header {
+  padding: 20px;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+    background-color: var(--main-bg-color);
+
+}
+.createGroup__headerInfo {
+    display: flex;
+  flex: 1;
+  padding-left: 20px;
+  flex-direction: column;
+  justify-content: center;
+  /* color: var(--primary-text-color); */
+  /* text-align: left;
+  font-weight: 600;
+  font-size: 20px; */
+}
+
+.chat__headerRight {
+  display: flex;
+  justify-content: space-between;
+  min-width: 100px;
+}
+
+.createGroup__body {
+  padding: 50px;
+  text-align: center;
+  background-color: var(--secondary-bg-color);
+  border-radius: 10px;
+  border: var(--secondary-border-color);
+  box-shadow: var(--main-box-shadow);
+}
+
+.createGroup__title{
+    color: var(--primary-text-color); 
+    text-align: left;
+    font-weight: 600;
+    font-size: 20px; 
+}

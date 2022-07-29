@@ -1,0 +1,31 @@
+.GroupSearch_user{
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.groupSearch__user__name{
+    display: flex;
+    cursor: pointer;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+/* .GroupSearch_user:hover{
+    background-color: #ebebeb;
+} */
+
+.GroupSearch_username{
+    display: flex;
+    /* align-items: center; */
+    padding-left: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    flex-direction: column;
+    text-align: left;
+}
+
+.GroupSearch__email{
+    font-size: 15px;
+    font-weight: normal;
+}
+

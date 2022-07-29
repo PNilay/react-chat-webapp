@@ -40,10 +40,13 @@
 }
 
 .createGroup__body {
+    overflow: scroll;
   padding: 50px;
+  height: 100%;
+  padding-top: 25px;
+  padding-bottom: 30px;
   text-align: center;
   background-color: var(--secondary-bg-color);
-  border-radius: 10px;
   border: var(--secondary-border-color);
   box-shadow: var(--main-box-shadow);
 }
@@ -53,4 +56,95 @@
     text-align: left;
     font-weight: 600;
     font-size: 20px; 
+}
+
+.createGroup__container {
+    min-width: 300px;
+  }
+
+  .createGroup__container .input__box > input {
+    border: none;
+    margin-left: 10px;
+    width: 90%;
+    outline: none;
+  }
+  
+  .createGroup__container .form__label{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .createGroup__search__box{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    height: 35px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.createGroup__search__box > input{
+    border: none;
+    margin-left: 10px;
+    width: 85%;
+    outline: none;
+}
+
+.createGroup__search__box > .MuiSvgIcon-root{
+    color: gray;
+    font-size: 24px !important;
+    padding: 10px;
+}
+
+.createGroup__footer{
+    display: flex;
+    align-items: center;
+    background-color: #f6f6f6;
+    height: 39px;
+    padding: 10px;
+    justify-content: center;
+}
+
+.createGroup__btn__container button {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+    border-radius: 10px;
+    text-transform: inherit !important;
+    background-color: #0a8d49 !important;
+    color: white;
+  }
+
+  .GroupSearch_user{
+    width: 80%;
+    margin-left: 10%;
+    display: flex;
+    padding: 10px;
+    background-color: #f6f6f6;
+    border-radius: 20px;
+    margin-top: 5px;
+    flex-direction: row;
+    margin-bottom: 5px;
+    cursor: pointer;
+    /* border-bottom: 1px solid #f6f6f6; */
+}
+
+.createGroup__members{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin-top: 10px;
+}
+
+.addmembers__label{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.display_selected_members{
+    text-align: left;
+    margin-top: 10px;
 }

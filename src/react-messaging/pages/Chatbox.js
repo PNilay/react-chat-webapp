@@ -43,6 +43,7 @@ function Chatbox() {
   const [chatName, setChatName] = useState("");
 
   const [messages, setMessages] = useState([]);
+  const [sender,setSender] = useState("");
 
   useEffect(() => {
     if (userId) {
@@ -69,6 +70,16 @@ function Chatbox() {
       //   .onSnapshot((snapshot) =>
       //     setMessages(snapshot.docs.map((doc) => doc.data()))
       //   );
+
+      const senderRef = collection(db, "users");
+
+      const s = query(senderRef, where("uid", "==", user.uid));
+
+      onSnapshot(s, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          setSender(doc.data());
+        });
+      });
 
       const messgaesRef = collection(db, "messages", combined_id, "chat");
 
@@ -103,6 +114,7 @@ function Chatbox() {
     await addDoc(collection(db, "messages", combined_id, "chat"), {
       message: input,
       from: user.uid,
+      from_name: sender.name,
       to: userId,
       timestamp: Timestamp.fromDate(new Date()),
     });
@@ -151,7 +163,7 @@ function Chatbox() {
                 message.to == userId && "chat__reciver"
               }`}
             >
-              <span className="chat__name">{message.name}</span>
+              <span className="chat__name">{message.from_name}</span>
               {message.message}
               <span className="chat__timestamp">
                 {new Date(message.timestamp?.toDate()).toUTCString()}

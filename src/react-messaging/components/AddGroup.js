@@ -14,17 +14,18 @@ import { useStateValue } from "../reactContext/StateProvider";
 import GroupSearch from "./GroupSearch";
 import CloseIcon from "@material-ui/icons/Close";
 import NameTag from "./NameTag";
-import { addDoc, Timestamp } from "firebase/firestore";
+import { addDoc, setDoc, Timestamp } from "firebase/firestore";
 
 
 function AddGroup() {
   const [groupName, setGroupName] = useState("");
   const navigate = useNavigate();
   const [searchVal, setSearchVal] = useState("");
-  const [users, setUsers] = useState([]);
   const [{ user }, dispatch] = useStateValue();
 
-  const [members, setMembers] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  const [members, setMembers] = useState([user]);
   const [error, setError] = useState();
 
   const addMember = (name) => {
@@ -50,10 +51,14 @@ function AddGroup() {
       setError("At least two members are required to create group!");
     } else {
       try {
-        await addDoc(collection(db, "groups"), {
+        const doc_ref = await addDoc(collection(db, "groups"), {
           groupName,
           members:members.map((user) => user.uid),
           createdAt: Timestamp.fromDate(new Date()),
+        });
+
+        await updateDoc(doc(db, "groups", doc_ref.id), {
+          uid: doc_ref.id,
         });
 
         setMembers([]);

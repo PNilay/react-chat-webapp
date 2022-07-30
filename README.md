@@ -1,10 +1,10 @@
 ### #TODO
 
-### I. Create accounts of users: registration, login, logout
+## I. Create accounts of users: registration, login, logout
 
-### II. Chat Functionalities
+## II. Chat Functionalities
 
-### III. Group Chat Functionalities
+## III. Group Chat Functionalities
 
-### IV. Trip Planning Functionalities
+## IV. Trip Planning Functionalities
 	

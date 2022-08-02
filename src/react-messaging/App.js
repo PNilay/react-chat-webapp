@@ -18,6 +18,7 @@ import Chatbox from "./pages/Chatbox";
 import { useStateValue } from "./reactContext/StateProvider";
 import AddGroup from "./components/AddGroup";
 import GroupChatbox from "./pages/GroupChatbox";
+import AboutChat from "./components/AboutChat";
 
 
 function App() {
@@ -40,6 +41,8 @@ function App() {
               <Route exact path= 'chat/:userId/' element={<Chatbox />} />
               <Route exact path= 'group/:userId/' element={<GroupChatbox />} />
               <Route exact path= 'add_group' element={<AddGroup />} />
+              <Route exact path= 'aboutChat/:userId/' element={<AboutChat />} />
+
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />

@@ -29,47 +29,34 @@ import {
   getDocs,
   orderBy,
 } from "firebase/firestore";
+import ChatboxBody from "../components/ChatboxBody";
+import AboutChat from "../components/AboutChat";
 
 // import { collection, query, where, getDocs } from "firebase/firestore";
 
 function Chatbox() {
-  const [input, setInput] = useState(""); //Variable to stor current typed text message
-
-  //   const [seed, setSeed] = useState("");
-
   const { userId } = useParams(); //userId of Reciver
   const [{ user }, dispatch] = useStateValue(); //information related to current user (sender)
 
   const [chatName, setChatName] = useState("");
 
   const [messages, setMessages] = useState([]);
-  const [sender,setSender] = useState("");
+  const [sender, setSender] = useState("");
+
+  const [selected, setSelected] = useState("chat");
 
   useEffect(() => {
     if (userId) {
+      setSelected("chat");
       const combined_id =
         user.uid > userId ? `${user.uid + userId}` : `${userId + user.uid}`;
-      // db.collection("users")
-      //   .doc(userId)
-      //   .onSnapshot((snapshot) => setChatName(snapshot.data().name));
-
       const usersRef = collection(db, "users");
-
       const q = query(usersRef, where("uid", "in", [userId]));
-
       onSnapshot(q, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
           setChatName(doc.data());
         });
       });
-
-      // db.collection("messages")
-      //   .doc(combined_id)
-      //   .collection("chat")
-      //   .orderBy("timestamp", "asc")
-      //   .onSnapshot((snapshot) =>
-      //     setMessages(snapshot.docs.map((doc) => doc.data()))
-      //   );
 
       const senderRef = collection(db, "users");
 
@@ -95,39 +82,9 @@ function Chatbox() {
     }
   }, [userId]);
 
-  const sendMessage = async (e) => {
-    e.preventDefault();
-
-    const combined_id =
-      user.uid > userId ? `${user.uid + userId}` : `${userId + user.uid}`;
-
-    // db.collection("messages")
-    //   .doc(combined_id)
-    //   .collection("message")
-    //   .add({
-    //     message: input,
-    //     from: user.uid,
-    //     to: userId,
-    //     timestamp: Timestamp.fromDate(new Date()),
-    //   });
-
-    await addDoc(collection(db, "messages", combined_id, "chat"), {
-      message: input,
-      from: user.uid,
-      from_name: sender.name,
-      to: userId,
-      timestamp: Timestamp.fromDate(new Date()),
-    });
-    setInput("");
-  };
-
   return (
     <div className="chat">
       <div className="chat__header">
-        {/* <Avatar
-          src={`https://avatars.dicebear.com/api/avataaars/${userId}.svg`}
-        /> */}
-
         <Avatar src={`https://avatars.dicebear.com/api/bottts/${userId}.svg`} />
 
         <div className="chat__headerInfo">
@@ -155,45 +112,24 @@ function Chatbox() {
         </div>
       </div>
 
-      <div className="chat__body">
-        <div className="chat__body__msgs">
-          {messages.map((message) => (
-            <p
-              className={`chat__message ${
-                message.to == userId && "chat__reciver"
-              }`}
-            >
-              <span className="chat__name">{message.from_name}</span>
-              {message.message}
-              <span className="chat__timestamp">
-                {new Date(message.timestamp?.toDate()).toUTCString()}
-              </span>
-            </p>
-          ))}
-        </div>
-
-        <div className="chat__body__menu">
-          <ChatBoxSideBar />
-        </div>
+      <div
+        className="chatbox__body"
+        style={{ display: selected == "chat" ? "flex" : "none" }}
+      >
+        <ChatboxBody
+          messages={messages}
+          userId={userId}
+          sender={sender}
+          setSelected={setSelected}
+        />
       </div>
 
-      <div className="chat__footer">
-        <InsertEmoticon />
-        <form>
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            type="text"
-            placeholder="Type a message"
-          />
-          <button type="submit" onClick={sendMessage}>
-            Send a Message
-          </button>
-        </form>
-        <Mic />
+      <div
+        className="chatbox__body"
+        style={{ display: selected == "member" ? "flex" : "none" }}
+      >
+        <AboutChat />
       </div>
-
-      {/* <ChatBoxSideBar /> */}
     </div>
   );
 }

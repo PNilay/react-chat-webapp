@@ -8,8 +8,12 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import PeopleIcon from "@material-ui/icons/People";
 
 import { Avatar, IconButton } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 
-function ChatBoxSideBar() {
+
+function ChatBoxSideBar({id, setSelected}) {
+  const navigate = useNavigate();
+
   return (
     <div className="chat__sidebar">
 
@@ -20,13 +24,11 @@ function ChatBoxSideBar() {
               <MenuOpenIcon />
             </IconButton>
 
-            {/* <span className="chat__linkName">Attractions</span> */}
           </li>
           <li className="chat__navList__Link">
             <IconButton>
               <PollIcon />
             </IconButton>
-            {/* <span className="chat__linkName">Polls</span> */}
 
           </li>
 
@@ -34,12 +36,11 @@ function ChatBoxSideBar() {
             <IconButton>
               <EventIcon />
             </IconButton>
-            {/* <span className="chat__linkName">Calender</span> */}
 
           </li>
 
           <li className="chat__navList__Link">
-            <IconButton>
+            <IconButton onClick={() => setSelected("member")}>
               <PeopleIcon />
             </IconButton>
           </li>

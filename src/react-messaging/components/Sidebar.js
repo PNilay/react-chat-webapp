@@ -68,10 +68,6 @@ function Sidebar() {
     };
   }, []);
 
-  useEffect(() => {
-    console.log("Groups");
-    console.log(groups);
-  }, [groups]);
 
   const sign_Out = async () => {
     await updateDoc(doc(db, "users", user.uid), {
@@ -145,7 +141,7 @@ function Sidebar() {
         className="sidebar__users"
         style={{ display: isChat ? "block" : "none" }}
       >
-        <SidebarUser addNewChat />
+        {/* <SidebarUser addNewChat /> */}
         {users
           .filter((val) => {
             if (searchVal == "") {

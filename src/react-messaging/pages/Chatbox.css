@@ -118,6 +118,12 @@
     padding: 10px;
     color: gray;
   }
+
+  .chatbox__body{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
   
   
   

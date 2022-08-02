@@ -133,7 +133,7 @@ function GroupChatBox() {
         </div>
 
         <div className="chat__body__menu">
-          <ChatBoxSideBar />
+          <ChatBoxSideBar id={userId}/>
         </div>
       </div>
 

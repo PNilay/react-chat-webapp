@@ -45,7 +45,7 @@ function ChatboxBody({ messages, userId, sender, setSelected }) {
         </div>
 
         <div className="chat__body__menu">
-          <ChatBoxSideBar id={userId} setSelected={setSelected}/>
+          <ChatBoxSideBar id={user.uid > userId ? `${user.uid + userId}` : `${userId + user.uid}`} />
         </div>
       </div>
 

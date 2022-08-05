@@ -11,7 +11,7 @@ import { Avatar, IconButton } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 
 
-function ChatBoxSideBar({id, setSelected}) {
+function ChatBoxSideBar({id}) {
   const navigate = useNavigate();
 
   return (
@@ -20,7 +20,7 @@ function ChatBoxSideBar({id, setSelected}) {
       <div className="chat__sidebarMenu">
         <ul className="chat__navList">
           <li className="chat__navList__Link">
-            <IconButton>
+          <IconButton onClick={() => navigate(`/attractions/${id}`)}>
               <MenuOpenIcon />
             </IconButton>
 
@@ -33,14 +33,18 @@ function ChatBoxSideBar({id, setSelected}) {
           </li>
 
           <li className="chat__navList__Link">
-            <IconButton>
+            <IconButton >
               <EventIcon />
             </IconButton>
 
           </li>
 
           <li className="chat__navList__Link">
-            <IconButton onClick={() => setSelected("member")}>
+            {/* <IconButton onClick={() => setSelected("member")}>
+              <PeopleIcon />
+            </IconButton> */}
+
+            <IconButton onClick={() => navigate(`/aboutChat/${id}`)}>
               <PeopleIcon />
             </IconButton>
           </li>

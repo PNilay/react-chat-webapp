@@ -64,7 +64,7 @@ function AddGroup() {
         setMembers([]);
         setError("");
         setGroupName("");
-        navigate("/");
+        navigate(-1);
       } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -100,7 +100,7 @@ function AddGroup() {
 
         <div className="createGroup__headerRight">
           <IconButton>
-            <CloseIcon style={{ color: "white" }} onClick={() => navigate('/')}/>
+            <CloseIcon style={{ color: "white" }} onClick={() => navigate(-1)}/>
           </IconButton>
         </div>
       </div>
@@ -126,7 +126,7 @@ function AddGroup() {
         </div>
 
         <div className="display_selected_members">
-          {members.map((userlist) => (
+          {members.filter(ul => {if(ul.name != null || ul.name != undefined){return ul}}).map((userlist) => (
             <NameTag name={userlist.name} />
           ))}
         </div>

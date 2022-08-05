@@ -2,7 +2,7 @@ import React from 'react'
 import "./NameTag.css";
 
 function NameTag({name}) {
-  return (
+  return  (
     <span className='nameTag'>
       {name}
     </span>

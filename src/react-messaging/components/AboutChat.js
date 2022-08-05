@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { Avatar } from "@material-ui/core";
 
 function AboutChat() {
 
@@ -8,8 +9,11 @@ function AboutChat() {
 
 
   return (
-    <div>
-      About Chart {userId}
+    <div className="profile__page">
+      <div className="profile__header">
+      <Avatar src={`https://avatars.dicebear.com/api/bottts/${userId}.svg`} />
+      <div>Name</div>
+      </div>
     </div>
   )
 }

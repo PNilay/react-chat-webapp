@@ -17,7 +17,8 @@ import ChatBoxSideBar from "../components/ChatBoxSideBar";
 import {
   addDoc,
   collection,
-  getDoc,
+  updateDoc,
+  setDoc,
   doc,
   Timestamp,
   FieldValue,
@@ -26,7 +27,11 @@ import {
   where,
   getDocs,
   orderBy,
+  arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
+import MessageReaction from "../components/MessageReaction";
+
 
 function GroupChatBox() {
   const { userId } = useParams(); //userId of Reciver
@@ -34,7 +39,36 @@ function GroupChatBox() {
   const [input, setInput] = useState(""); //Variable to stor current typed text message
   const [{ user }, dispatch] = useStateValue(); //information related to current user (sender)
   const [messages, setMessages] = useState([]);
-  const [sender,setSender] = useState("");
+  const [sender, setSender] = useState("");
+
+  const [attractions, setAttractions] = useState([]);
+
+  useEffect(() => {
+    const usersRef = collection(db, "attractions");
+
+    const q = query(
+      usersRef,
+      where(
+        "uid",
+        "==",
+        userId
+      )
+    );
+
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let attraction = [];
+      querySnapshot.forEach((doc) => {
+        attraction.push(doc.data());
+      });
+      if (attraction.length > 0) {
+        setAttractions(attraction?.[0].attrlist);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     if (userId) {
@@ -48,7 +82,6 @@ function GroupChatBox() {
         });
       });
 
-
       const senderRef = collection(db, "users");
 
       const s = query(senderRef, where("uid", "==", user.uid));
@@ -58,7 +91,6 @@ function GroupChatBox() {
           setSender(doc.data());
         });
       });
-
 
       // Fetching message chain from database
       const messgaesRef = collection(db, "messages", userId, "chat");
@@ -75,13 +107,60 @@ function GroupChatBox() {
     }
   }, [userId]);
 
+
+  const handleReaction = async (message, icon) => {
+
+    const citiesRef = collection(db, "messages", userId, "chat");
+
+    const q = query(
+      citiesRef,
+      where("timestamp", "==", message.timestamp),
+      where("from", "==", message.from)
+    );
+
+    const querySnapshot = await getDocs(q);
+
+    const msgRefId = querySnapshot.docs[0].id;
+
+    if (icon != "➕") {
+      await updateDoc(doc(db, "messages", userId, "chat", msgRefId), {
+        reaction: icon != message.reaction ? icon : "",
+      });
+    } else {
+      if (!message.isAttraction) {
+        if (attractions.length == 0) {
+          const doc_ref = await setDoc(doc(db, "attractions", userId), {
+            uid: userId,
+            attrlist: [message.message],
+            createdAt: Timestamp.fromDate(new Date()),
+            updatedAt: Timestamp.fromDate(new Date()),
+          });
+        } else {
+          await updateDoc(doc(db, "attractions", userId), {
+            attrlist: arrayUnion(message.message),
+            updatedAt: Timestamp.fromDate(new Date()),
+          });
+        }
+      } else {
+        await updateDoc(doc(db, "attractions", userId), {
+          attrlist: arrayRemove(message.message),
+          updatedAt: Timestamp.fromDate(new Date()),
+        });
+      }
+
+      await updateDoc(doc(db, "messages", userId, "chat", msgRefId), {
+        isAttraction: !message.isAttraction,
+      });
+    }
+  };
+
   const sendMessage = async (e) => {
     e.preventDefault();
 
     await addDoc(collection(db, "messages", userId, "chat"), {
       message: input,
       from: user.uid,
-      from_name:sender.name,
+      from_name: sender.name,
       to: userId,
       timestamp: Timestamp.fromDate(new Date()),
       isGroup: true,
@@ -122,7 +201,13 @@ function GroupChatBox() {
               className={`chat__message ${
                 message.from == user.uid && "chat__reciver"
               }`}
+              style={{ background: message.isAttraction ? "lightgray" : "" }}
             >
+              <MessageReaction
+                message={message}
+                handleReaction={handleReaction}
+              />
+
               <span className="chat__name">{message.from_name}</span>
               {message.message}
               <span className="chat__timestamp">
@@ -133,7 +218,7 @@ function GroupChatBox() {
         </div>
 
         <div className="chat__body__menu">
-          <ChatBoxSideBar id={userId}/>
+          <ChatBoxSideBar id={userId} />
         </div>
       </div>
 
@@ -155,7 +240,7 @@ function GroupChatBox() {
 
       {/* <ChatBoxSideBar /> */}
     </div>
-  )
+  );
 }
 
 export default GroupChatBox;

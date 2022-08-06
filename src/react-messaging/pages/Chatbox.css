@@ -35,7 +35,7 @@
     /* background-color: rgba(242, 243, 0, 0.1); */
     flex: 1;
     /* padding: 30px; */
-    /* overflow: scroll; */
+    overflow: scroll;
     display: flex;
     flex-direction: row;
   }

@@ -112,10 +112,6 @@ function Chatbox() {
         </div>
       </div>
 
-      <div
-        className="chatbox__body"
-        style={{ display: selected == "chat" ? "flex" : "none" }}
-      >
         <ChatboxBody
           messages={messages}
           userId={userId}
@@ -124,13 +120,6 @@ function Chatbox() {
         />
       </div>
 
-      <div
-        className="chatbox__body"
-        style={{ display: selected == "member" ? "flex" : "none" }}
-      >
-        <AboutChat />
-      </div>
-    </div>
   );
 }
 

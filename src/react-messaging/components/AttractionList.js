@@ -53,7 +53,6 @@ function AttractionList() {
   }, [update]);
 
   const handleRemove = async (location) => {
-    console.log("remove");
     await updateDoc(doc(db, "attractions", userId), {
       attrlist: arrayRemove(location),
       updatedAt: Timestamp.fromDate(new Date()),

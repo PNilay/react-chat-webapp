@@ -1,0 +1,25 @@
+.chat__reaction {
+  display: none;
+  position: absolute;
+  top: -40px;
+  right: 0px;
+  font-size: 18px;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  width: max-content;
+  z-index: 1;
+}
+
+.chat__reaction__icon {
+  padding: 5px;
+}
+.chat__message:hover .chat__reaction {
+  display: block;
+}
+
+.chat__user_reaction {
+  position: absolute;
+  top: -5px;
+  left: 0;
+}

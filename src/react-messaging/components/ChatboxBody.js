@@ -16,8 +16,7 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-
-// import AddLocationIcon from '@mui/icons-material/AddLocation';
+import MessageReaction from "./MessageReaction";
 
 function ChatboxBody({ messages, userId, sender, setSelected }) {
   const [{ user }, dispatch] = useStateValue(); //information related to current user (sender)
@@ -73,8 +72,8 @@ function ChatboxBody({ messages, userId, sender, setSelected }) {
       });
     } else {
       const combined_id =
-          user.uid > userId ? `${user.uid + userId}` : `${userId + user.uid}`;
-      if (icon != message.isAttraction) {
+        user.uid > userId ? `${user.uid + userId}` : `${userId + user.uid}`;
+      if (!message.isAttraction) {
         if (attractions.length == 0) {
           const doc_ref = await setDoc(doc(db, "attractions", combined_id), {
             uid: combined_id,
@@ -88,7 +87,7 @@ function ChatboxBody({ messages, userId, sender, setSelected }) {
             updatedAt: Timestamp.fromDate(new Date()),
           });
         }
-      }else{
+      } else {
         await updateDoc(doc(db, "attractions", combined_id), {
           attrlist: arrayRemove(message.message),
           updatedAt: Timestamp.fromDate(new Date()),
@@ -100,25 +99,6 @@ function ChatboxBody({ messages, userId, sender, setSelected }) {
       });
     }
   };
-
-  // const addAttraction = async (input) => {
-  //   const combined_id =
-  //     user.uid > userId ? `${user.uid + userId}` : `${userId + user.uid}`;
-
-  //   if (attractions.length == 0) {
-  //     const doc_ref = await setDoc(doc(db, "attractions", combined_id), {
-  //       uid: combined_id,
-  //       attrlist: [input],
-  //       createdAt: Timestamp.fromDate(new Date()),
-  //       updatedAt: Timestamp.fromDate(new Date()),
-  //     });
-  //   } else {
-  //     await updateDoc(doc(db, "attractions", combined_id), {
-  //       attrlist: arrayUnion(input),
-  //       updatedAt: Timestamp.fromDate(new Date()),
-  //     });
-  //   }
-  // };
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -145,60 +125,13 @@ function ChatboxBody({ messages, userId, sender, setSelected }) {
             <p
               className={`chat__message ${
                 message.to == userId && "chat__reciver"
-              }`} style={{background: message.isAttraction ? "lightgray" : ""}}
+              }`}
+              style={{ background: message.isAttraction ? "lightgray" : "" }}
             >
-              <span className="chat__reaction">
-                <span
-                  className="chat__reaction__icon"
-                  onClick={() => handleReaction(message, "👍")}
-                >
-                  👍
-                </span>
-                <span
-                  className="chat__reaction__icon"
-                  onClick={() => handleReaction(message, "😍")}
-                >
-                  😍
-                </span>
-                <span
-                  className="chat__reaction__icon"
-                  onClick={() => handleReaction(message, "😆")}
-                >
-                  😆
-                </span>
-                <span
-                  className="chat__reaction__icon"
-                  onClick={() => handleReaction(message, "😲")}
-                >
-                  😲
-                </span>
-                <span
-                  className="chat__reaction__icon"
-                  onClick={() => handleReaction(message, "🙁")}
-                >
-                  🙁
-                </span>
-                <span
-                  className="chat__reaction__icon"
-                  onClick={() => handleReaction(message, "😡")}
-                >
-                  😡
-                </span>
-                <span className="chat__reaction__icon">|</span>
-                <span
-                  className="chat__reaction__icon"
-                  onClick={() => handleReaction(message, "➕")}
-                >
-                  ➕
-                </span>
-              </span>
-
-              <span
-                className="chat__user_reaction"
-                style={{ display: message.reaction != "" ? "block" : "none" }}
-              >
-                {message.reaction}
-              </span>
+              <MessageReaction
+                message={message}
+                handleReaction={handleReaction}
+              />
 
               <span className="chat__name">{message.from_name}</span>
               {message.message}

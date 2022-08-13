@@ -1,0 +1,163 @@
+:root {
+  --main-bg-color: #061f3a;
+  --secondary-bg-color: rgb(0 42 85 / 59%);
+  --main-box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.2);
+  --secondary-border-color: rgb(19, 47, 76);
+  --primary-text-color: white;
+  --main-red: rgb(173, 20, 87);
+  --main-green: rgb(102, 187, 106);
+}
+
+/* CREATE POLL STYLES */
+
+.createPoll__type .css-u4tvz2-MuiFormLabel-root {
+  color: var(--main-red) !important;
+  text-transform: uppercase;
+  padding-bottom: 8px;
+  font-weight: 500 !important;
+}
+.createPoll__type .MuiFormControl-root {
+  width: 100%;
+}
+
+.createPoll__type .MuiFormGroup-root {
+  justify-content: space-around;
+}
+
+.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked {
+  color: var(--main-red) !important;
+}
+
+.poll_question_label {
+  color: var(--main-bg-color) !important;
+  text-transform: capitalize;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  font-weight: 500 !important;
+}
+
+.poll_question {
+  margin: 10px 0px;
+  padding: 5px 0px;
+}
+
+.question_card {
+  /* border: #061f3a 1px solid; */
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+  box-shadow: -1px 4px 20px -6px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+}
+
+.css-1ptx2yq-MuiInputBase-root-MuiInput-root:after {
+  border-bottom: 2px solid var(--main-red) !important;
+}
+
+.css-1ptx2yq-MuiInputBase-root-MuiInput-root:hover:not(.Mui-disabled):before {
+  border-bottom: 2px solid var(--main-green) !important;
+}
+.poll_button {
+  margin-top: 30px;
+  /* width: 100%; */
+  border-radius: 10px;
+  text-transform: inherit !important;
+  background-color: #0a8d49 !important;
+  color: white;
+}
+
+.left-section {
+  width: 50%;
+}
+
+.attractions__checklist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.toppings-list-item {
+  width: 50%;
+}
+
+.custom-option-add {
+  border: none;
+  margin-left: 10px;
+  flex: 1;
+  outline: none;
+}
+
+.custom-option-Addbtn {
+  padding-left: 20px;
+  padding-right: 20px;
+  /* width: 100%; */
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  /* border-radius: 10px; */
+  text-transform: inherit !important;
+  background-color: #0a8d49 !important;
+  color: white;
+}
+
+.custom-checkbox {
+  padding-top: 5px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-checkbox__input {
+  display: none;
+}
+
+.custom-checkbox__box {
+  width: 1em;
+  height: 1em;
+  border: 2px solid rgb(95 95 95);
+  box-sizing: border-box;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.custom-checkbox__box::after {
+  content: "\2714";
+  color: #ffffff;
+  transform: scale(0);
+  transition: transform 0.15s;
+}
+
+.custom-checkbox__input:checked + .custom-checkbox__box {
+  background: var(--main-red);
+  border: 2px solid var(--main-red);
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.custom-checkbox__input:checked + .custom-checkbox__box::after {
+  transform: scale(1);
+}
+
+.input__box {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    height: 35px;
+    border-radius: 10px;
+  }
+
+
+  .input__box input {
+    border: none;
+    margin-left: 10px;
+    width: 90%;
+    outline: none;
+  }

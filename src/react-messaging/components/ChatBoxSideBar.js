@@ -25,7 +25,7 @@ function ChatBoxSideBar({id}) {
             </IconButton>
 
           </li>
-          <li className="chat__navList__Link">
+          <li className="chat__navList__Link" onClick={() => navigate(`/polls/${id}`)}>
             <IconButton>
               <PollIcon />
             </IconButton>

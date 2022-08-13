@@ -37,6 +37,7 @@
   display: flex;
   flex: 1;
   justify-content: center;
+  overflow: scroll;
 }
 
 .attractionList__body__container {

@@ -20,6 +20,8 @@ import AddGroup from "./components/AddGroup";
 import GroupChatbox from "./pages/GroupChatbox";
 import AboutChat from "./components/AboutChat";
 import AttractionList from "./components/AttractionList";
+import PollsList from "./components/PollsList";
+
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
@@ -43,6 +45,7 @@ function App() {
               <Route exact path= 'add_group' element={<AddGroup />} />
               <Route exact path= 'aboutChat/:userId/' element={<AboutChat />} />
               <Route exact path= 'attractions/:userId/' element={<AttractionList />} />
+              <Route exact path= 'polls/:userId/' element={<PollsList />} />
 
 
             </Route>

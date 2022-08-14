@@ -144,7 +144,7 @@ function CreatePolls() {
         const temp = aOption;
         ids.map((id) => temp.push(attractions[id]));
 
-        await addDoc(collection(db, "polls"), {
+        const poll_ref = await addDoc(collection(db, "polls"), {
           uid: userId,
           poll_type,
           question,
@@ -152,6 +152,16 @@ function CreatePolls() {
           options: temp,
           createdAt: Timestamp.fromDate(new Date()),
           createdBy: user.uid,
+          completed_by: [],
+        });
+
+        await setDoc(doc(db, "polls_responce", poll_ref.id),{
+          createdBy: user.uid,
+        });
+
+
+        await updateDoc(doc(db, "polls", poll_ref.id), {
+          polls_responce_id: poll_ref.id,
         });
 
         setData({

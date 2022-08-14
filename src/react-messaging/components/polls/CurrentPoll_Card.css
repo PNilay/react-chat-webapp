@@ -1,0 +1,65 @@
+.currentPoll__card {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+  box-shadow: -1px 4px 20px -6px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+  margin: 15px 5px;
+}
+
+.currentPoll__card__question {
+  text-transform: capitalize;
+  font-size: large;
+  margin: 10px;
+  font-weight: 600;
+}
+
+.poll_options {
+  margin: 10px 25px;
+}
+
+.currentPoll__card__option {
+  padding: 5px;
+}
+
+.css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
+  padding-left: 8px;
+}
+
+.poll_card_msp {
+  list-style: none;
+  padding-left: 0;
+}
+
+.poll_card_msp li {
+  display: flex;
+  align-items: center;
+  border: solid 2px #d0d0d0;
+  background-color: white;
+  border-radius: 0.2em;
+  padding: 0.5em 0.8em 0.5em 0.5em;
+  margin-bottom: 1em;
+}
+
+.poll_card_msp p {
+  max-width: none;
+  font-weight: bold;
+  margin: 0;
+}
+
+.poll_options_msp {
+  margin: 10px 10px;
+}
+
+.poll_options_msp_dropable {
+  padding: 10px;
+  background-color: #3765964d;
+  border-radius: 10px;
+}
+
+.current_poll_card_submit .btn__container {
+  margin-top: -25px;
+
+}

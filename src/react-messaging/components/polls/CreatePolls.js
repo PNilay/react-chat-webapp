@@ -157,6 +157,7 @@ function CreatePolls() {
 
         await setDoc(doc(db, "polls_responce", poll_ref.id),{
           createdBy: user.uid,
+          poll_reference_id: poll_ref.id,
         });
 
 

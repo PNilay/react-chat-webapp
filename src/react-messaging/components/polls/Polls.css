@@ -161,3 +161,9 @@
     width: 90%;
     outline: none;
   }
+
+
+  .currentPoll__card__count{
+    margin-top: 10px;
+    margin-left: 20px;
+  }

@@ -62,9 +62,13 @@ function CurrentPolls() {
       updatedAt: Timestamp.fromDate(new Date()),
     });
 
+    
+
   }
 
   return (
+
+    polls.length > 0 ?
     <div>
       <div className="current__poll_list">
         {polls.map((poll, index) => (
@@ -73,6 +77,8 @@ function CurrentPolls() {
       </div>
 
     </div>
+    :
+    <div className="currentPoll__card"> No current polls available</div>
   )
 }
 

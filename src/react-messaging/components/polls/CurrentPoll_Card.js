@@ -31,7 +31,19 @@ function CurrentPoll_Card({ poll, card_index, handleSubmit }) {
 
   const handleValidation = () => {
     if (poll.poll_type == "msp") {
-      handleSubmit(card_index, options_list);
+      const index_option_list = new Array(options_list.length).fill(0);
+
+      options_list.map((option, i) => {
+        poll?.options?.map((t, index) => {
+          if (t == option) {
+            index_option_list[i] = index;
+          }
+        });
+      });
+
+      // console.log("Drag and Drop Index Array: ", index_option_list);
+      // handleSubmit(card_index, options_list);
+      handleSubmit(card_index, index_option_list);
     } else {
       if (radio_select != "") {
         setRadioSelect("");
@@ -53,12 +65,13 @@ function CurrentPoll_Card({ poll, card_index, handleSubmit }) {
           onChange={handleRadioChange}
         >
           <p className="currentPoll__card__question_info">
-            Select one of the below options  <span style={{color:"red"}}>{error != "" ? error : null}</span>
+            Select one of the below options{" "}
+            <span style={{ color: "red" }}>{error != "" ? error : null}</span>
           </p>
-          {poll.options.map((option) => (
+          {poll.options.map((option, index) => (
             <div className="currentPoll__card__option">
               <FormControlLabel
-                value={option}
+                value={index}
                 control={<Radio />}
                 label={option}
               />

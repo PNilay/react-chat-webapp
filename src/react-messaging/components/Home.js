@@ -3,17 +3,17 @@ import Sidebar from "./Sidebar";
 import "./Home.css";
 
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Navigate,
-    Link,
-    Outlet,
-    useParams,
-    NavLink,
-    useNavigate,
-    useLocation,
-  } from "react-router-dom";
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  Link,
+  Outlet,
+  useParams,
+  NavLink,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 
 function Home() {
   return (
@@ -22,9 +22,9 @@ function Home() {
         <Sidebar />
         <Outlet />
       </div>
-      </div>
+    </div>
 
-  );
+);
 }
 
 export default Home;

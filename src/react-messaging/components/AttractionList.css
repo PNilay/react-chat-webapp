@@ -15,6 +15,9 @@
   /* place-items: center; */
 }
 
+.attractionList__title{
+  text-transform: capitalize;
+}
 .attractionList__header {
   padding: 20px;
   border-bottom: 1px solid lightgray;

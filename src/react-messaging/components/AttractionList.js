@@ -18,6 +18,7 @@ import {
   arrayRemove,
 } from "firebase/firestore";
 import { Button } from "@material-ui/core";
+import { useStateValue } from "../reactContext/StateProvider";
 
 function AttractionList() {
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ function AttractionList() {
   const [attractions, setAttractions] = useState([]);
   const [edit, setEdit] = useState("");
   const [update, setUpdate] = useState("");
+  const [{ user }, dispatch] = useStateValue(); //information related to current user (sender)
+  const [name, setName] = useState("");
 
   const { userId } = useParams(); //userId of charroom/group
 
@@ -46,6 +49,39 @@ function AttractionList() {
     return () => {
       unsubscribe();
     };
+  }, []);
+
+  useEffect(() => {
+    if (userId.includes(user.uid)) {
+      console.log("Singal Chat ");
+      // Single chat
+      const t = userId.replace(user.uid, "");
+      const usersRef = collection(db, "users");
+      const q = query(usersRef, where("uid", "in", [user.uid, t]));
+
+      let chatusers = "";
+
+      const name = [];
+      onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach(async (doc) => {
+          name.push(doc.data());
+        });
+
+        const name2 = " " + name[0].name + " & " + name[1].name;
+
+        setName(name2);
+      });
+    } else {
+      // Group Chat
+      const usersRef = collection(db, "groups");
+      const q = query(usersRef, where("uid", "==", userId));
+
+      onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          setName(doc.data().groupName);
+        });
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -78,6 +114,7 @@ function AttractionList() {
     setEdit("");
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (attractions.length == 0) {
@@ -101,11 +138,14 @@ function AttractionList() {
       <div className="attractionList__header">
         <div className="attractionList__profile">
           <Avatar
-            src={`https://avatars.dicebear.com/api/bottts/${userId}.svg`}
+            src={`https://avatars.dicebear.com/api/bottts/${userId.replace(user.uid, "")}.svg`}
           />
         </div>
         <div className="attractionList__headerInfo">
           <div className="attractionList__title">ATTRACTION LIST</div>
+          <div className="attractionList__title">
+            <b>{name}</b>
+          </div>
         </div>
 
         <div className="attractionList__headerRight">

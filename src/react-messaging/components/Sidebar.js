@@ -1,7 +1,6 @@
 import React from "react";
 import "./Sidebar.css";
 import { Avatar, IconButton } from "@material-ui/core";
-import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -11,20 +10,24 @@ import SidebarUser from "./SidebarUser";
 import { useEffect, useState } from "react";
 import { auth, db } from "../../firebase";
 import { signOut } from "firebase/auth";
-import { updateDoc, doc, onSnapshot, QuerySnapshot } from "firebase/firestore";
+import {
+  updateDoc,
+  doc,
+  onSnapshot,
+  collection,
+  query,
+  where,
+} from "firebase/firestore";
 import { actionTypes } from "../reactContext/Reducer";
 import { useNavigate } from "react-router-dom";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import ToggleButton from "@mui/material/ToggleButton";
-import Button from "@mui/material/Button";
 import SidebarGroup from "./SidebarGroup";
 
-// Firebase Query:
-import { collection, query, where } from "firebase/firestore";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import GroupsIcon from "@mui/icons-material/Groups";
 
 function Sidebar() {
-  // const [{}, dispatch] = useStateValue();
   const [users, setUsers] = useState([]);
   const [groups, setGroups] = useState([]);
 
@@ -33,7 +36,7 @@ function Sidebar() {
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
 
-  const [isChat, setIsChat] = useState(false);
+  const [value, setValue] = React.useState(0);
 
   useEffect(() => {
     const usersRef = collection(db, "users");
@@ -86,6 +89,12 @@ function Sidebar() {
     navigate("/add_group");
   };
 
+  const handleChange = (event, newValue) => {
+    console.log("new values: ", newValue);
+    setValue(newValue);
+    // setIsChat()
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar__header">
@@ -95,12 +104,6 @@ function Sidebar() {
         <div className="sidebar__header__right">
           <IconButton onClick={add_Group}>
             <GroupAddIcon />
-          </IconButton>
-          <IconButton>
-            <ChatIcon />
-          </IconButton>
-          <IconButton>
-            <MoreVertIcon />
           </IconButton>
           <IconButton onClick={sign_Out}>
             <ExitToAppIcon />
@@ -120,26 +123,16 @@ function Sidebar() {
         </div>
       </div>
 
-      <div className="sidebar__toggle">
-        <Button
-          variant={isChat ? "contained" : "outlined"}
-          className="sidebar__toggle__chats"
-          onClick={() => setIsChat(true)}
-        >
-          Chats
-        </Button>
-        <Button
-          variant={isChat ? "outlined" : "contained"}
-          className="sidebar__toggle__groups"
-          onClick={() => setIsChat(false)}
-        >
-          Groups
-        </Button>
+      <div>
+        <Tabs value={value} onChange={handleChange} className="polls__tabs">
+          <Tab icon={<ChatIcon />} label="Chats" />
+          <Tab icon={<GroupsIcon />} label="Groups" />
+        </Tabs>
       </div>
 
       <div
         className="sidebar__users"
-        style={{ display: isChat ? "block" : "none" }}
+        style={{ display: value == 0 ? "block" : "none" }}
       >
         {/* <SidebarUser addNewChat /> */}
         {users
@@ -162,10 +155,9 @@ function Sidebar() {
           ))}
       </div>
 
-
       <div
         className="sidebar__users"
-        style={{ display: !isChat ? "block" : "none" }}
+        style={{ display: value != 0 ? "block" : "none" }}
       >
         {groups
           .filter((val) => {
@@ -177,7 +169,7 @@ function Sidebar() {
               return val;
             }
           })
-          .map((userlist,index) => (
+          .map((userlist, index) => (
             <SidebarGroup
               key={index}
               id={userlist.uid}
@@ -186,7 +178,6 @@ function Sidebar() {
             />
           ))}
       </div>
-
     </div>
   );
 }

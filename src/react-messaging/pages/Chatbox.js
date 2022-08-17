@@ -1,8 +1,6 @@
 import { Avatar, IconButton } from "@material-ui/core";
 import {
   AttachFile,
-  InsertEmoticon,
-  Mic,
   SearchOutlined,
 } from "@material-ui/icons";
 import MoreVert from "@material-ui/icons/MoreVert";
@@ -10,19 +8,10 @@ import userEvent from "@testing-library/user-event";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Chatbox.css";
-// import db from "../../firebase";
-
-import firebase from "firebase/compat/app"; //v9
 import { useStateValue } from "../reactContext/StateProvider";
 import { db } from "../../firebase";
-import ChatBoxSideBar from "../components/ChatBoxSideBar";
 import {
-  addDoc,
   collection,
-  setDoc,
-  doc,
-  Timestamp,
-  FieldValue,
   onSnapshot,
   query,
   where,
@@ -30,13 +19,11 @@ import {
   orderBy,
 } from "firebase/firestore";
 import ChatboxBody from "../components/ChatboxBody";
-import AboutChat from "../components/AboutChat";
 
-// import { collection, query, where, getDocs } from "firebase/firestore";
 
 function Chatbox() {
   const { userId } = useParams(); //userId of Reciver
-  const [{ user }, dispatch] = useStateValue(); //information related to current user (sender)
+  const [{ user, loginUser }, dispatch] = useStateValue(); //information related to current user (sender)
 
   const [chatName, setChatName] = useState("");
 
@@ -67,7 +54,7 @@ function Chatbox() {
           setSender(doc.data());
         });
       });
-
+      
       const messgaesRef = collection(db, "messages", combined_id, "chat");
 
       const q2 = query(messgaesRef, orderBy("timestamp", "asc"));
@@ -100,7 +87,7 @@ function Chatbox() {
         </div>
 
         <div className="chat__headerRight">
-          <IconButton>
+          {/* <IconButton>
             <SearchOutlined />
           </IconButton>
           <IconButton>
@@ -108,7 +95,7 @@ function Chatbox() {
           </IconButton>
           <IconButton>
             <MoreVert />
-          </IconButton>
+          </IconButton> */}
         </div>
       </div>
 

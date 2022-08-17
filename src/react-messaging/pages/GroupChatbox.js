@@ -181,7 +181,7 @@ function GroupChatBox() {
           </p>
         </div>
 
-        <div className="chat__headerRight">
+        {/* <div className="chat__headerRight">
           <IconButton>
             <SearchOutlined />
           </IconButton>
@@ -191,7 +191,7 @@ function GroupChatBox() {
           <IconButton>
             <MoreVert />
           </IconButton>
-        </div>
+        </div> */}
       </div>
 
       <div className="chat__body">

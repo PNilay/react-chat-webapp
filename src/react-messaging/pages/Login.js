@@ -56,7 +56,7 @@ function Login() {
         type: actionTypes.SET_USER,
         user: result.user,
       });
-       
+
       navigate("/");
     } catch (error) {
       const errorCode = error.code;

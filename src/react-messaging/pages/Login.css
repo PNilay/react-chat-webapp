@@ -93,3 +93,13 @@
     color: #0a8d49;
     font-weight: 600;
 }
+
+
+
+@media only screen and (max-width: 400px) {
+    .login__container {
+        padding: 0;
+        background-color: inherit;
+    }
+  
+  }

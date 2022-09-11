@@ -1,0 +1,125 @@
+:root {
+  --main-bg-color: #061f3a;
+  --secondary-bg-color: rgb(0 42 85 / 59%);
+  --main-box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.2);
+  --secondary-border-color: rgb(19, 47, 76);
+  --primary-text-color: white;
+  --main-red: rgb(173, 20, 87);
+  --main-green: rgb(102, 187, 106);
+}
+
+.profile__page {
+  color: white;
+  flex: 0.65 1;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.profile__page__header {
+  padding: 20px;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  background-color: var(--main-bg-color);
+}
+
+.profile__page__title {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.profile__body {
+  display: flex;
+  flex-direction: column;
+  /* flex: 1; */
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+  box-shadow: -1px 4px 20px -6px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+  margin: 25px 20px;
+}
+
+.profile__group_members {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+  box-shadow: -1px 4px 20px -6px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+  margin: 0px 20px;
+  margin-bottom: 25px;
+}
+
+.profile__members {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+  box-shadow: -1px 4px 20px -6px rgb(0 0 0 / 20%);
+  border-radius: 10px;
+  margin: 10px 25px;
+}
+
+.profile_group_members_title {
+  margin: 10px 25px;
+  font-weight: 700;
+}
+
+.profile_member_email{
+    margin: 0px 10px;
+}
+
+.profile_member_name {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 8px 10px;
+}
+.aboutChat__avatar .MuiAvatar-root {
+  margin: auto !important;
+  padding: 30px !important;
+  width: 10vh;
+  height: 10vh;
+}
+.aboutChat__info {
+  color: var(--main-bg-color);
+}
+
+.aboutChat__info_name {
+  text-align: center;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.aboutChat__info_email {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.aboutChat__info_lastSeen {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.profile__body {
+  color: #061f3a;
+}
+
+@media only screen and (max-width: 700px) {
+  .profile__page {
+      display: flex;
+      flex: 1;
+  }
+
+}

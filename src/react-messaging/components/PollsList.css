@@ -46,3 +46,11 @@
   .css-1aquho2-MuiTabs-indicator{
     background-color: var(--main-red) !important;
   }
+
+  @media only screen and (max-width: 700px) {
+    .pollsList {
+        display: flex;
+        flex: 1;
+    }
+  
+  }

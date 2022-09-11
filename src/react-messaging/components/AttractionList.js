@@ -19,6 +19,7 @@ import {
 } from "firebase/firestore";
 import { Button } from "@material-ui/core";
 import { useStateValue } from "../reactContext/StateProvider";
+import ChatBoxSideBar from "../components/ChatBoxSideBar";
 
 function AttractionList() {
   const navigate = useNavigate();
@@ -114,7 +115,6 @@ function AttractionList() {
     setEdit("");
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (attractions.length == 0) {
@@ -138,7 +138,10 @@ function AttractionList() {
       <div className="attractionList__header">
         <div className="attractionList__profile">
           <Avatar
-            src={`https://avatars.dicebear.com/api/bottts/${userId.replace(user.uid, "")}.svg`}
+            src={`https://avatars.dicebear.com/api/bottts/${userId.replace(
+              user.uid,
+              ""
+            )}.svg`}
           />
         </div>
         <div className="attractionList__headerInfo">
@@ -160,6 +163,7 @@ function AttractionList() {
           </IconButton>
         </div>
       </div>
+
 
       <div className="attractionList__body">
         <div className="attractionList__body__container">
@@ -207,6 +211,7 @@ function AttractionList() {
             ))}
           </div>
         </div>
+
       </div>
 
       <div className="attractionList__footer"></div>

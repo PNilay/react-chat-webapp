@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 10vw;
+  /* min-width: 10vw; */
 }
 
 .sidebar__header__right .MuiSvgIcon-root {
@@ -70,4 +70,16 @@ justify-content: space-around;
 
 .sidebar__toggle button:hover{
     border: none;
+}
+
+
+@media only screen and (max-width: 700px) {
+  .sidebar-show {
+      display: flex;
+      flex: 1;
+  }
+
+  .sidebar-hide{
+    display: none !important;
+  }
 }

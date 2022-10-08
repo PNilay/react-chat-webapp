@@ -27,7 +27,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import GroupsIcon from "@mui/icons-material/Groups";
 
-function Sidebar() {
+function Sidebar({isDisplay}) {
   const [users, setUsers] = useState([]);
   const [groups, setGroups] = useState([]);
 
@@ -90,13 +90,12 @@ function Sidebar() {
   };
 
   const handleChange = (event, newValue) => {
-    console.log("new values: ", newValue);
     setValue(newValue);
     // setIsChat()
   };
 
   return (
-    <div className="sidebar">
+    <div className={"sidebar " +  (!isDisplay ? 'sidebar-hide': 'sidebar-show')}>
       <div className="sidebar__header">
         <Avatar
           src={`https://avatars.dicebear.com/api/bottts/${user.uid}.svg`}
@@ -145,7 +144,7 @@ function Sidebar() {
               return val;
             }
           })
-          .map((userlist) => (
+          .map((userlist, index) => (
             <SidebarUser
               key={userlist.uid}
               id={userlist.uid}

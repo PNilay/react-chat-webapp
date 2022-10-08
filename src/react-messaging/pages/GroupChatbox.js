@@ -10,7 +10,7 @@ import userEvent from "@testing-library/user-event";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Chatbox.css";
-import firebase from "firebase/compat/app"; //v9
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useStateValue } from "../reactContext/StateProvider";
 import { db } from "../../firebase";
 import ChatBoxSideBar from "../components/ChatBoxSideBar";
@@ -31,6 +31,7 @@ import {
   arrayRemove,
 } from "firebase/firestore";
 import MessageReaction from "../components/MessageReaction";
+import { useNavigate } from "react-router-dom";
 
 
 function GroupChatBox() {
@@ -42,6 +43,7 @@ function GroupChatBox() {
   const [sender, setSender] = useState("");
 
   const [attractions, setAttractions] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const usersRef = collection(db, "attractions");
@@ -171,6 +173,12 @@ function GroupChatBox() {
   return (
     <div className="chat">
       <div className="chat__header">
+
+      <div className="chat-back">
+          <IconButton onClick={() => navigate(`/`)}>
+            <ArrowBackIcon />
+          </IconButton>
+        </div>
         <Avatar src={`https://avatars.dicebear.com/api/bottts/${userId}.svg`} />
 
         <div className="chat__headerInfo">
@@ -235,7 +243,9 @@ function GroupChatBox() {
             Send a Message
           </button>
         </form>
-        <Mic />
+        {/* <Mic /> */}
+        <div className="mic" style={{width: '44px'}}></div>
+
       </div>
 
       {/* <ChatBoxSideBar /> */}

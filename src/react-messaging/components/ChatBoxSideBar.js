@@ -33,17 +33,13 @@ function ChatBoxSideBar({id}) {
           </li>
 
           <li className="chat__navList__Link">
-            <IconButton >
+            <IconButton disabled={true}>
               <EventIcon />
             </IconButton>
 
           </li>
 
           <li className="chat__navList__Link">
-            {/* <IconButton onClick={() => setSelected("member")}>
-              <PeopleIcon />
-            </IconButton> */}
-
             <IconButton onClick={() => navigate(`/aboutChat/${id}`)}>
               <PeopleIcon />
             </IconButton>
@@ -51,11 +47,6 @@ function ChatBoxSideBar({id}) {
         </ul>
       </div>
 
-      {/* <div className="chat__sidebar__footer">
-      <IconButton>
-              <DeleteForeverIcon />
-            </IconButton>
-      </div> */}
     </div>
   );
 }

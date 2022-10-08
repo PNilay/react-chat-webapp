@@ -166,7 +166,8 @@ function ChatboxBody({ messages, userId, sender, setSelected }) {
             Send a Message
           </button>
         </form>
-        <Mic />
+        {/* <Mic /> */}
+        <div className="mic" style={{width: '44px'}}></div>
       </div>
     </>
   );

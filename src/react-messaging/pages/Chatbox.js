@@ -1,8 +1,7 @@
 import { Avatar, IconButton } from "@material-ui/core";
-import {
-  AttachFile,
-  SearchOutlined,
-} from "@material-ui/icons";
+import { AttachFile, SearchOutlined } from "@material-ui/icons";
+
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MoreVert from "@material-ui/icons/MoreVert";
 import userEvent from "@testing-library/user-event";
 import React, { useEffect, useState } from "react";
@@ -19,7 +18,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 import ChatboxBody from "../components/ChatboxBody";
-
+import { useNavigate } from "react-router-dom";
 
 function Chatbox() {
   const { userId } = useParams(); //userId of Reciver
@@ -31,6 +30,9 @@ function Chatbox() {
   const [sender, setSender] = useState("");
 
   const [selected, setSelected] = useState("chat");
+
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (userId) {
@@ -54,7 +56,7 @@ function Chatbox() {
           setSender(doc.data());
         });
       });
-      
+
       const messgaesRef = collection(db, "messages", combined_id, "chat");
 
       const q2 = query(messgaesRef, orderBy("timestamp", "asc"));
@@ -72,6 +74,12 @@ function Chatbox() {
   return (
     <div className="chat">
       <div className="chat__header">
+        <div className="chat-back">
+          <IconButton onClick={() => navigate(`/`)}>
+            <ArrowBackIcon />
+          </IconButton>
+        </div>
+
         <Avatar src={`https://avatars.dicebear.com/api/bottts/${userId}.svg`} />
 
         <div className="chat__headerInfo">
@@ -99,14 +107,13 @@ function Chatbox() {
         </div>
       </div>
 
-        <ChatboxBody
-          messages={messages}
-          userId={userId}
-          sender={sender}
-          setSelected={setSelected}
-        />
-      </div>
-
+      <ChatboxBody
+        messages={messages}
+        userId={userId}
+        sender={sender}
+        setSelected={setSelected}
+      />
+    </div>
   );
 }
 

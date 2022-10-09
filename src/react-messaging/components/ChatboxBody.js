@@ -18,10 +18,29 @@ import {
 } from "firebase/firestore";
 import MessageReaction from "./MessageReaction";
 
+import Picker from 'emoji-picker-react';
+
+
 function ChatboxBody({ messages, userId, sender, setSelected }) {
   const [{ user }, dispatch] = useStateValue(); //information related to current user (sender)
   const [input, setInput] = useState(""); //Variable to stor current typed text message
   const [attractions, setAttractions] = useState([]);
+
+  //Variable for emoji icon button
+  const [showPicker, setShowPicker] = useState(false);
+
+  const onEmojiClick = (event, emojiObject) => {
+    console.log("Emoji Object ", emojiObject);
+    console.log(emojiObject.emoji);
+
+    setInput(prevInput => prevInput + emojiObject.emoji);
+    setShowPicker(false);
+  };
+
+
+  useEffect(() => {
+    document.title = `You clicked ${showPicker} times`;
+  },[showPicker]);
 
   useEffect(() => {
     const usersRef = collection(db, "attractions");
@@ -153,8 +172,12 @@ function ChatboxBody({ messages, userId, sender, setSelected }) {
         </div>
       </div>
 
+      {showPicker && <Picker
+          pickerStyle={{ width: '100%' }}
+          onEmojiClick={onEmojiClick} />}
+
       <div className="chat__footer">
-        <InsertEmoticon />
+        <InsertEmoticon  onClick={() => setShowPicker(val => !val)}/>
         <form>
           <input
             value={input}

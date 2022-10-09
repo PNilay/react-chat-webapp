@@ -32,6 +32,7 @@ import {
 } from "firebase/firestore";
 import MessageReaction from "../components/MessageReaction";
 import { useNavigate } from "react-router-dom";
+import Picker from 'emoji-picker-react';
 
 
 function GroupChatBox() {
@@ -44,6 +45,21 @@ function GroupChatBox() {
 
   const [attractions, setAttractions] = useState([]);
   const navigate = useNavigate();
+
+  //Variable for emoji icon button
+  const [showPicker, setShowPicker] = useState(false);
+
+  const onEmojiClick = (event, emojiObject) => {
+    // console.log("Emoji Object ", emojiObject);
+    // console.log(emojiObject.emoji);
+
+    setInput(prevInput => prevInput + emojiObject.emoji);
+    setShowPicker(false);
+  };
+
+    useEffect(() => {
+    document.title = `You clicked ${showPicker} times`;
+  },[showPicker]);
 
   useEffect(() => {
     const usersRef = collection(db, "attractions");
@@ -230,8 +246,12 @@ function GroupChatBox() {
         </div>
       </div>
 
+      {showPicker && <Picker
+          pickerStyle={{ width: '100%' }}
+          onEmojiClick={onEmojiClick} />}
+
       <div className="chat__footer">
-        <InsertEmoticon />
+        <InsertEmoticon  onClick={() => setShowPicker(val => !val)}/>
         <form>
           <input
             value={input}

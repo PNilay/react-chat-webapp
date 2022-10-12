@@ -16,9 +16,14 @@
 
 .sidevaruser__info{
     margin-left: 15px;
+    overflow: hidden;
 }
 
 a {
     text-decoration: none !important;
     color: black;
+}
+
+.sidebar_user_last_msg{
+    white-space: nowrap;
 }

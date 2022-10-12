@@ -54,7 +54,7 @@ function SidebarUser({ id, userl, addNewChat, search }) {
         <Avatar src={`https://avatars.dicebear.com/api/bottts/${id}.svg`} />
         <div className="sidevaruser__info">
           <h2>{userl.name}</h2>
-          <p>{messages[messages.length-1]?.message}</p>
+          <p className="sidebar_user_last_msg">{messages[messages.length-1]?.message}</p>
         </div>
       </div>
     </Link>

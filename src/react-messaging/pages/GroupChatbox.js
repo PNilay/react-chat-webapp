@@ -7,7 +7,7 @@ import {
 } from "@material-ui/icons";
 import MoreVert from "@material-ui/icons/MoreVert";
 import userEvent from "@testing-library/user-event";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef} from "react";
 import { useParams } from "react-router-dom";
 import "./Chatbox.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -49,17 +49,17 @@ function GroupChatBox() {
   //Variable for emoji icon button
   const [showPicker, setShowPicker] = useState(false);
 
-  const onEmojiClick = (event, emojiObject) => {
-    // console.log("Emoji Object ", emojiObject);
-    // console.log(emojiObject.emoji);
+  const bottomRef = useRef(null);
 
+  useEffect(() => {
+    // 👇️ scroll to bottom every time messages change
+    bottomRef.current?.scrollIntoView();
+  }, [messages]);
+
+  const onEmojiClick = (event, emojiObject) => {
     setInput(prevInput => prevInput + emojiObject.emoji);
     setShowPicker(false);
   };
-
-    useEffect(() => {
-    document.title = `You clicked ${showPicker} times`;
-  },[showPicker]);
 
   useEffect(() => {
     const usersRef = collection(db, "attractions");
@@ -239,6 +239,9 @@ function GroupChatBox() {
               </span>
             </p>
           ))}
+
+          <div ref={bottomRef}/>
+
         </div>
 
         <div className="chat__body__menu">

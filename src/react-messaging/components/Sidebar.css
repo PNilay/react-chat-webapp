@@ -1,4 +1,5 @@
 .sidebar {
+  width: 30%;
   flex: 0.35;
   display: flex;
   flex-direction: column;

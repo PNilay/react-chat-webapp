@@ -1,10 +1,9 @@
 import { AttachFile, InsertEmoticon, Mic } from "@material-ui/icons";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useStateValue } from "../reactContext/StateProvider";
 import { db } from "../../firebase";
 import ChatBoxSideBar from "../components/ChatBoxSideBar";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
-import AddLocationIcon from "@material-ui/icons/AddLocation";
 import {
   setDoc,
   onSnapshot,
@@ -26,16 +25,22 @@ function ChatboxBody({ messages, userId, sender, setSelected }) {
   const [input, setInput] = useState(""); //Variable to stor current typed text message
   const [attractions, setAttractions] = useState([]);
 
+  const bottomRef = useRef(null);
+
   //Variable for emoji icon button
   const [showPicker, setShowPicker] = useState(false);
 
   const onEmojiClick = (event, emojiObject) => {
-    console.log("Emoji Object ", emojiObject);
-    console.log(emojiObject.emoji);
-
     setInput(prevInput => prevInput + emojiObject.emoji);
     setShowPicker(false);
   };
+
+
+
+  useEffect(() => {
+    // 👇️ scroll to bottom every time messages change
+    bottomRef.current?.scrollIntoView();
+  }, [messages]);
 
 
   useEffect(() => {
@@ -153,12 +158,17 @@ function ChatboxBody({ messages, userId, sender, setSelected }) {
               />
 
               <span className="chat__name">{message.from_name}</span>
+              <div>
               {message.message}
+              </div>
+              
               <span className="chat__timestamp">
                 {new Date(message.timestamp?.toDate()).toUTCString()}
               </span>
             </p>
           ))}
+
+          <div ref={bottomRef}/>
         </div>
 
         <div className="chat__body__menu">

@@ -138,7 +138,7 @@ function PollsList() {
             className="polls__tabs"
           >
             <Tab icon={<PollIcon />} label="CURRENT" />
-            <Tab icon={<CreateIcon />} label="CREATE NEW2" />
+            <Tab icon={<CreateIcon />} label="CREATE NEW" />
             <Tab icon={<PersonPinIcon />} label="CLOSED" />
           </Tabs>
 

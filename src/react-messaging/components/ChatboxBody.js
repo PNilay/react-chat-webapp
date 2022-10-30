@@ -43,9 +43,9 @@ function ChatboxBody({ messages, userId, sender, setSelected }) {
   }, [messages]);
 
 
-  useEffect(() => {
-    document.title = `You clicked ${showPicker} times`;
-  },[showPicker]);
+  // useEffect(() => {
+  //   document.title = `You clicked ${showPicker} times`;
+  // },[showPicker]);
 
   useEffect(() => {
     const usersRef = collection(db, "attractions");

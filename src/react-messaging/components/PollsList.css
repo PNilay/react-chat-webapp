@@ -47,6 +47,18 @@
     background-color: var(--main-red) !important;
   }
 
+
+  .css-k008qs {
+    justify-content: space-around !important;
+  }
+
+  .css-1tnnsql.Mui-selected{
+      color: var(--main-red) !important;
+  }
+
+  .css-ttwr4n{
+    background-color: var(--main-red) !important;
+  }
   @media only screen and (max-width: 700px) {
     .pollsList {
         display: flex;

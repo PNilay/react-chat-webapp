@@ -4,12 +4,6 @@ import {
   Routes,
   Route,
   Navigate,
-  Link,
-  Outlet,
-  useParams,
-  NavLink,
-  useNavigate,
-  useLocation,
 } from "react-router-dom";
 import Login from "./pages/Login";
 import SignUp from "./pages/Signup";
@@ -51,24 +45,10 @@ function App() {
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-            {/* <Route path="/chat/:userId" element={<Chatbox />} /> */}
-
-            {/* <Route path="/myapp" element={<Navigate replace to="/" />} /> */}
-            {/* <Route path="/navigation" element={<Navigate to="/" />} /> */}
           </Routes>
         </Router>
       )}
     </>
-
-    // <Router>
-    //   <Routes>
-    //     {/* <Route exact path="/" element={<Home />} /> */}
-    //     <Route path="/login" element={<Login />} />
-    //     <Route path="/signup" element={<SignUp />} />
-    //     <Route path="/myapp" element={<Navigate replace to="/" />} />
-    //     <Route path="/navigation" element={<Navigate to="/" />} />
-    //   </Routes>
-    // </Router>
   );
 }
 

@@ -8,8 +8,9 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
-import { auth, db } from "../../firebase";
+import { auth, db, app } from "../../firebase";
 import { setDoc, doc, Timestamp, updateDoc } from "firebase/firestore";
+
 
 function Login() {
   const [{}, dispatch] = useStateValue();

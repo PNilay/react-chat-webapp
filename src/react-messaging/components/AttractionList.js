@@ -145,7 +145,7 @@ function AttractionList() {
           />
         </div>
         <div className="attractionList__headerInfo">
-          <div className="attractionList__title">ATTRACTION LIST</div>
+          <div className="attractionList__title">Task Board</div>
           <div className="attractionList__title">
             <b>{name}</b>
           </div>
@@ -171,7 +171,7 @@ function AttractionList() {
             <div className="input__box">
               <input
                 type="text"
-                placeholder="Add Attraction"
+                placeholder="Add Task"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 className="attraction-add"

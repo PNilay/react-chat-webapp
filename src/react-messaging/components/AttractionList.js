@@ -145,7 +145,7 @@ function AttractionList() {
           />
         </div>
         <div className="attractionList__headerInfo">
-          <div className="attractionList__title">Task Board</div>
+          <div className="attractionList__title">TASK PLANNER</div>
           <div className="attractionList__title">
             <b>{name}</b>
           </div>
